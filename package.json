@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "cucumber.js",
   "scripts": {
-    "test": "cucumber-js"
-  },
+  "test": "cucumber-js",
+  "test:with-report": "npm run test && npm run generate-report",
+  "test:headed": "HEADLESS=false cucumber-js"
+}
   "keywords": [],
   "author": "",
   "license": "ISC",
