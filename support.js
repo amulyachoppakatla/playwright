@@ -14,6 +14,22 @@ Before(async function () {
     });
     this.page = await this.browser.newPage();
     console.log(`Launching browser in ${process.env.HEADLESS === 'true' ? 'headless' : 'headed'} mode.`);
+
+    await this.page.goto('https://practicetestautomation.com/practice-test-login/', { waitUntil: 'domcontentloaded' });
+
+    // If SSL warning page appears, handle it manually by clicking "Advanced" and "Proceed"
+    try {
+        // Wait for the "Advanced" button to appear and click it
+        await this.page.waitForSelector('#details-button', { timeout: 5000 });
+        await this.page.click('#details-button');  // Click 'Advanced' button
+        
+        // Wait for the 'Proceed to unsafe site' link and click it
+        await this.page.waitForSelector('a#proceed-link', { timeout: 5000 });
+        await this.page.click('a#proceed-link');  // Click 'Proceed' to proceed to the site
+        console.log('SSL certificate warning bypassed.');
+    } catch (e) {
+        console.log('No SSL warning encountered or already bypassed.');
+    }
 });
 
 // After hook to capture screenshot on failure and close the browser
