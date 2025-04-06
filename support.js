@@ -10,7 +10,7 @@ setDefaultTimeout(60 * 1000);  // 1 minute timeout for each step
 Before(async function () {
     this.browser = await chromium.launch({
         headless: process.env.HEADLESS === 'true',
-        args: ['--ignore-certificate-errors']  // Ignore SSL certificate errors
+        args: ['--ignore-certificate-errors', '--no-sandbox', '--disable-web-security', '--disable-features=IsolateOrigins,site-per-process']  // Ignore SSL certificate errors and disable security features
     });
     this.page = await this.browser.newPage();
     console.log(`Launching browser in ${process.env.HEADLESS === 'true' ? 'headless' : 'headed'} mode.`);
