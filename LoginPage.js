@@ -12,5 +12,9 @@ class LoginPage {
         await this.page.click(this.loginButton);
     }
 }
-
+const clickNavLink = async (linkText) => {
+    // Locate the div by its inner text (e.g., "BDEx Boomerang")
+    const link = await page.locator(`div.sasapd:text("${linkText}")`);
+    await link.click();
+};
 module.exports = LoginPage;
